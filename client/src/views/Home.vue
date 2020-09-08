@@ -3,11 +3,7 @@
     <el-main>
       <el-card class="card" :body-style="{ padding: '0px', height: '100%' }">
         <editor-header slot="header" @save="onSave" />
-        <editor
-          :mimeType="mimeType"
-          @lang-change="onLangChange"
-          v-model="code"
-        />
+        <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" />
       </el-card>
     </el-main>
   </div>
@@ -37,8 +33,30 @@ export default {
     };
   },
 
+  mounted() {
+    if (this.$route.query.id) {
+      axios
+        .get(`/pastes/${this.$route.query.id}`)
+        .then(res => {
+          this.code = res.data.content;
+          this.mimeType = res.data.mimeType;
+        })
+        .catch(err => {
+          this.$message({
+            showClose: true,
+            message: err?.response?.statusText || "Error fetching paste",
+            type: "error"
+          });
+        });
+    }
+  },
+
   methods: {
     onSave(expireAfterMinutes) {
+      if (this.code === "") {
+        return;
+      }
+
       let mimeType = this.mimeType;
 
       if (!this.mimeTypeChanged) {
@@ -68,6 +86,7 @@ export default {
     },
 
     onLangChange(lang) {
+      console.log(lang);
       if (lang !== this.mimeType) {
         this.mimeTypeChanged = true;
       }

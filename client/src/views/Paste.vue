@@ -10,12 +10,7 @@
           @new="$router.push('/')"
           readonly
         />
-        <editor
-          :mimeType="mimeType"
-          @lang-change="onLangChange"
-          v-model="code"
-          readonly
-        />
+        <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" readonly />
       </el-card>
     </el-main>
   </div>
@@ -55,6 +50,8 @@ export default {
           message: err?.response?.statusText || "Error sending that request",
           type: "error"
         });
+
+        this.$router.push("/");
       });
   },
 
@@ -70,7 +67,8 @@ export default {
     },
 
     onEdit() {
-      this.$router.push("/");
+      const id = this.$route.params.id;
+      this.$router.push({ name: "Home", query: { id } });
     },
 
     onRaw() {

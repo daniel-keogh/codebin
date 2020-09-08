@@ -10,9 +10,7 @@
 
     <div class="editor-footer">
       <div class="editor-footer__start">
-        <span v-if="!readonly"
-          >Line {{ status.line }}, Column {{ status.col }}</span
-        >
+        <span v-if="!readonly">Line {{ status.line }}, Column {{ status.col }}</span>
         <div v-else>
           <span>Read Only</span>
           <i class="el-icon-lock"></i>
@@ -26,12 +24,7 @@
           filterable
           placeholder="Language"
         >
-          <el-option
-            v-for="lang in langs"
-            :key="lang.mime"
-            :label="lang.name"
-            :value="lang.mime"
-          />
+          <el-option v-for="lang in langs" :key="lang.mime" :label="lang.name" :value="lang.mime" />
         </el-select>
       </div>
     </div>
@@ -52,7 +45,7 @@ export default {
     const readOnly = this.readonly ?? false;
 
     return {
-      language: "Plain Text",
+      language: "text/plain",
       options: {
         readOnly,
         mode: "text/plain",
@@ -96,6 +89,7 @@ export default {
 
     onCursorActivity(event) {
       const { line, ch } = event.getCursor();
+
       this.status.line = line + 1;
       this.status.col = ch + 1;
     }

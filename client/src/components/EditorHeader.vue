@@ -5,40 +5,16 @@
     <div class="controls">
       <template v-if="readonly">
         <el-button-group>
-          <el-button
-            type="primary"
-            icon="el-icon-document-add"
-            round
-            @click="$emit('new')"
-            >New</el-button
-          >
-          <el-button
-            type="primary"
-            icon="el-icon-edit"
-            round
-            @click="$emit('edit')"
-            >Edit</el-button
-          >
-          <el-button
-            type="primary"
-            icon="el-icon-paperclip"
-            round
-            @click="$emit('copy')"
-            >Copy</el-button
-          >
-          <el-button
-            type="primary"
-            icon="el-icon-document"
-            round
-            @click="$emit('raw')"
-            >Raw</el-button
-          >
+          <el-button type="primary" icon="el-icon-document-add" round @click="$emit('new')">New</el-button>
+          <el-button type="primary" icon="el-icon-edit" round @click="$emit('edit')">Edit</el-button>
+          <el-button type="primary" icon="el-icon-paperclip" round @click="$emit('copy')">Copy</el-button>
+          <el-button type="primary" icon="el-icon-document" round @click="$emit('raw')">Raw</el-button>
         </el-button-group>
       </template>
       <template v-else>
         <div class="controls__expiration">
           <label>Expires</label>
-          <el-select v-model="expiration" placeholder="Select">
+          <el-select v-model="expiration">
             <el-option
               v-for="item in expires"
               :key="item.value"
@@ -54,8 +30,7 @@
             round
             icon="el-icon-check"
             @click="$emit('save', expiration)"
-            >Save</el-button
-          >
+          >Save</el-button>
         </el-button-group>
       </template>
     </div>
@@ -133,7 +108,6 @@ export default {
   }
 
   .title {
-    font-weight: bold;
     user-select: none;
     padding-right: 4rem;
   }
