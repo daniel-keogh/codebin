@@ -19,7 +19,7 @@
 
       <div class="editor-footer__end">
         <el-select
-          :value="language"
+          :value="mimeType"
           @input="$emit('lang-change', $event)"
           filterable
           placeholder="Language"
@@ -35,6 +35,8 @@
 import { CodeMirror } from "vue-codemirror";
 
 export default {
+  name: "Editor",
+
   props: {
     mimeType: String,
     value: String,
@@ -43,12 +45,12 @@ export default {
 
   data() {
     const readOnly = this.readonly ?? false;
+    const mode = this.mimeType ?? "text/plain";
 
     return {
-      language: "text/plain",
       options: {
         readOnly,
-        mode: "text/plain",
+        mode,
         styleActiveLine: !readOnly,
         cursorBlinkRate: readOnly ? -1 : 530
       },
@@ -84,7 +86,6 @@ export default {
       }
 
       this.options.mode = lang.mime;
-      this.language = lang.name;
     },
 
     onCursorActivity(event) {
@@ -97,7 +98,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .editor-wrapper {
   display: flex;
   flex-direction: column;

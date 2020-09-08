@@ -4,7 +4,7 @@ const vowels = 'aeiou';
 const consonants = 'bcdfghjklmnpqrstvwxyz';
 
 export class RandomId {
-  static generate(mimeType?: string, length: number = 12): string {
+  static generate(mimeType?: string, length: number = 10): string {
     let id = '';
 
     const first = Math.round(Math.random());

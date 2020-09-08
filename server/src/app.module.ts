@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { join } from 'path';
 
 import { AuthModule } from './auth/auth.module';
 import { PastesModule } from './pastes/pastes.module';
@@ -19,9 +16,6 @@ import { ServerErrorFilter } from './common/filters/server-error.filter';
     RawModule,
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfig,
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'client', 'dist'),
     }),
     ScheduleModule.forRoot(),
   ],

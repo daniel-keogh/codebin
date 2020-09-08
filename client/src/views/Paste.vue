@@ -37,7 +37,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     axios
       .get(`/pastes/${this.$route.params.id}`)
       .then(res => {
@@ -67,8 +67,12 @@ export default {
     },
 
     onEdit() {
-      const id = this.$route.params.id;
-      this.$router.push({ name: "Home", query: { id } });
+      this.$router.push({
+        name: "Home",
+        query: {
+          id: this.$route.params.id
+        }
+      });
     },
 
     onRaw() {

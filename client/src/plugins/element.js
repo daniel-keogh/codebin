@@ -1,32 +1,30 @@
 import Vue from "vue";
 
-import lang from 'element-ui/lib/locale/lang/en';
-import locale from 'element-ui/lib/locale';
+import lang from "element-ui/lib/locale/lang/en";
+import locale from "element-ui/lib/locale";
 
-import 'element-ui/lib/theme-chalk/index.css';
-import 'element-ui/lib/theme-chalk/reset.css';
+import "element-ui/lib/theme-chalk/index.css";
+import "element-ui/lib/theme-chalk/reset.css";
 
 locale.use(lang);
 
 import {
-    Select,
-    Button,
-    ButtonGroup,
-    Icon,
-    Card,
-    Container,
-    Main,
-    Message,
-    Option
-} from 'element-ui';
+  Button,
+  ButtonGroup,
+  Card,
+  Icon,
+  Main,
+  Message,
+  Option,
+  Select
+} from "element-ui";
 
-Vue.use(Select);
 Vue.use(Button);
 Vue.use(ButtonGroup);
-Vue.use(Icon);
 Vue.use(Card);
-Vue.use(Container);
+Vue.use(Icon);
 Vue.use(Main);
 Vue.use(Option);
+Vue.use(Select);
 
 Vue.prototype.$message = Message;

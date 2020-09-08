@@ -1,13 +1,13 @@
 <template>
   <div class="editor-header">
-    <h1 class="title">CodeBin</h1>
+    <h1 class="title">Codebin</h1>
 
     <div class="controls">
       <template v-if="readonly">
         <el-button-group>
           <el-button type="primary" icon="el-icon-document-add" round @click="$emit('new')">New</el-button>
           <el-button type="primary" icon="el-icon-edit" round @click="$emit('edit')">Edit</el-button>
-          <el-button type="primary" icon="el-icon-paperclip" round @click="$emit('copy')">Copy</el-button>
+          <el-button type="primary" icon="el-icon-copy-document" round @click="$emit('copy')">Copy</el-button>
           <el-button type="primary" icon="el-icon-document" round @click="$emit('raw')">Raw</el-button>
         </el-button-group>
       </template>
@@ -15,12 +15,7 @@
         <div class="controls__expiration">
           <label>Expires</label>
           <el-select v-model="expiration">
-            <el-option
-              v-for="item in expires"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in expires" :key="item.value" :label="item.label" :value="item"></el-option>
           </el-select>
         </div>
 
@@ -89,7 +84,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.expiration = this.expires[0];
   }
 };

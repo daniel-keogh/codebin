@@ -33,7 +33,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     if (this.$route.query.id) {
       axios
         .get(`/pastes/${this.$route.query.id}`)
@@ -86,7 +86,6 @@ export default {
     },
 
     onLangChange(lang) {
-      console.log(lang);
       if (lang !== this.mimeType) {
         this.mimeTypeChanged = true;
       }
