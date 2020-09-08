@@ -1,10 +1,36 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { APP_FILTER } from '@nestjs/core';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { join } from 'path';
+
+import { AuthModule } from './auth/auth.module';
+import { PastesModule } from './pastes/pastes.module';
+import { RawModule } from './raw/raw.module';
+import { TypeOrmConfig } from './config/typeorm.config';
+import { ServerErrorFilter } from './common/filters/server-error.filter';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    AuthModule,
+    PastesModule,
+    RawModule,
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfig,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'client', 'dist'),
+    }),
+    ScheduleModule.forRoot(),
+  ],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: ServerErrorFilter,
+    },
+  ],
 })
 export class AppModule {}
