@@ -1,4 +1,4 @@
-# client
+# Codebin
 
 ## Project setup
 ```
