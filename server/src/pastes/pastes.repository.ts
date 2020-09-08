@@ -14,10 +14,16 @@ export class PasteRepository extends Repository<Paste> {
     const { content, mimeType, expireAfterMinutes } = createPasteDto;
 
     const paste = new Paste();
-    paste.mimeType = mimeType;
     paste.content = content;
-    paste.expireAfterMinutes = expireAfterMinutes;
     paste.user = user;
+    
+    if (mimeType) {
+      paste.mimeType = mimeType;
+    }
+
+    if (expireAfterMinutes) {
+      paste.expireAfterMinutes = expireAfterMinutes;
+    }
 
     try {
       await paste.save();

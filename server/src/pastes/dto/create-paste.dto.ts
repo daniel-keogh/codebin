@@ -1,16 +1,17 @@
 import {
   IsNotEmpty,
-  IsMimeType,
   IsOptional,
-  Min,
   IsInt,
+  Min,
+  Validate,
 } from 'class-validator';
+import { IsValidMime } from '../../common/validators/mime.validator';
 
 export class CreatePasteDto {
   @IsNotEmpty()
   content: string;
 
-  @IsMimeType()
+  @Validate(IsValidMime)
   @IsOptional()
   mimeType: string;
 
