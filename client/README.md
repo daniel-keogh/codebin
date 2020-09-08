@@ -1,5 +1,7 @@
 # Codebin
 
+Vue.js client application.
+
 ## Project setup
 ```
 npm install

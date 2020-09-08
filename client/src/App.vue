@@ -1,32 +1,65 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
+<script>
+export default {
+  name: "app",
+  components: {}
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-#nav {
-  padding: 30px;
+body {
+  box-sizing: border-box;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.CodeMirror {
+  height: 100% !important;
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 14px !important;
+  padding: 10px 0 !important;
+}
+
+.CodeMirror-scroll {
+  cursor: text !important;
+}
+
+@media (max-width: 768px) {
+  .el-main {
+    padding: 0px !important;
+  }
+
+  .el-card {
+    border: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  button span {
+    display: none;
+  }
+
+  .CodeMirror {
+    font-size: 12px !important;
   }
 }
 </style>
