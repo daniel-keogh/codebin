@@ -24,6 +24,7 @@
             type="success"
             round
             icon="el-icon-check"
+            :disabled="disableSave"
             @click="$emit('save', expiration)"
           >Save</el-button>
         </el-button-group>
@@ -37,7 +38,8 @@ export default {
   name: "EditorHeader",
 
   props: {
-    readonly: Boolean
+    readonly: Boolean,
+    disableSave: Boolean
   },
 
   data() {
@@ -47,10 +49,6 @@ export default {
         {
           label: "Never",
           value: null
-        },
-        {
-          label: "10 minutes",
-          value: 10
         },
         {
           label: "15 minutes",
@@ -79,6 +77,10 @@ export default {
         {
           label: "1 day",
           value: 1440
+        },
+        {
+          label: "1 week",
+          value: 10080
         }
       ]
     };

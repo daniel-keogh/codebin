@@ -1,4 +1,8 @@
-import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+  ValidationArguments,
+} from 'class-validator';
 import { MimeUtils } from '../../utils/mime.util';
 
 @ValidatorConstraint()
@@ -8,6 +12,6 @@ export class IsValidMime implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return `${args.property} is not a recognised MIME type`;
+    return `${args.property} is not a supported MIME type`;
   }
 }

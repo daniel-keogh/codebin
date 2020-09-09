@@ -2,7 +2,7 @@
   <div class="home">
     <el-main>
       <el-card class="card" :body-style="{ padding: '0px', height: '100%' }">
-        <editor-header slot="header" @save="onSave" />
+        <editor-header slot="header" :disableSave="disableSave" @save="onSave" />
         <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" />
       </el-card>
     </el-main>
@@ -51,12 +51,14 @@ export default {
     }
   },
 
+  computed: {
+    disableSave() {
+      return this.code === "";
+    }
+  },
+
   methods: {
     onSave(expireAfterMinutes) {
-      if (this.code === "") {
-        return;
-      }
-
       let mimeType = this.mimeType;
 
       if (!this.mimeTypeChanged) {
