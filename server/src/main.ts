@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 
 import { AppModule } from './app.module';
-import { TooManyRequestsException } from './common/exceptions/too-many-requestsexception';
+import { TooManyRequestsException } from './common/exceptions/too-many-requests.exception';
 
 import * as dotenv from 'dotenv';
 import * as helmet from 'helmet';
