@@ -15,9 +15,9 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  if (process.env.NODE_ENV === 'development') {
-    app.enableCors();
-  }
+  app.enableCors({
+    origin: new RegExp('^.+' + process.env.CLIENT_ORIGIN + '$'),
+  });
 
   app.useGlobalInterceptors(new TransformInterceptor());
 
