@@ -39,45 +39,45 @@
 </template>
 
 <script>
-import { CodeMirror } from "vue-codemirror";
+import { CodeMirror } from 'vue-codemirror';
 
 export default {
-  name: "Editor",
+  name: 'Editor',
 
   props: {
     mimeType: String,
     value: String,
-    readonly: Boolean
+    readonly: Boolean,
   },
 
   data() {
     const readOnly = this.readonly ?? false;
-    const mode = this.mimeType ?? "text/plain";
+    const mode = this.mimeType ?? 'text/plain';
 
     return {
       options: {
         readOnly,
         mode,
         styleActiveLine: !readOnly,
-        cursorBlinkRate: readOnly ? -1 : 530
+        cursorBlinkRate: readOnly ? -1 : 530,
       },
       status: {
         line: 1,
-        col: 1
-      }
+        col: 1,
+      },
     };
   },
 
   computed: {
     langs() {
       return CodeMirror.modeInfo;
-    }
+    },
   },
 
   watch: {
     mimeType() {
       this.setMode();
-    }
+    },
   },
 
   mounted() {
@@ -88,7 +88,7 @@ export default {
     async setMode() {
       const lang = CodeMirror.findModeByMIME(this.mimeType);
 
-      if (lang.mime !== "text/plain") {
+      if (lang.mime !== 'text/plain') {
         await import(`codemirror/mode/${lang.mode}/${lang.mode}.js`).then();
       }
 
@@ -100,8 +100,8 @@ export default {
 
       this.status.line = line + 1;
       this.status.col = ch + 1;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,10 +1,10 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import lang from "element-ui/lib/locale/lang/en";
-import locale from "element-ui/lib/locale";
+import lang from 'element-ui/lib/locale/lang/en';
+import locale from 'element-ui/lib/locale';
 
-import "element-ui/lib/theme-chalk/index.css";
-import "element-ui/lib/theme-chalk/reset.css";
+import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/reset.css';
 
 locale.use(lang);
 
@@ -24,8 +24,8 @@ import {
   PageHeader,
   Popover,
   Select,
-  Tag
-} from "element-ui";
+  Tag,
+} from 'element-ui';
 
 Vue.use(Button);
 Vue.use(ButtonGroup);

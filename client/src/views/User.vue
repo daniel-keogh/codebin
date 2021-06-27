@@ -31,32 +31,32 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
-import PasteCard from "@/components/PasteCard";
+import PasteCard from '@/components/PasteCard';
 
 export default {
-  name: "User",
+  name: 'User',
 
   components: {
-    PasteCard
+    PasteCard,
   },
 
   data() {
     return {
       items: [],
-      isLoading: true
+      isLoading: true,
     };
   },
 
   mounted() {
     const headers = {
-      Authorization: `Bearer ${this.$store.state.auth.token}`
+      Authorization: `Bearer ${this.$store.state.auth.token}`,
     };
 
     axios
-      .get("/pastes", {
-        headers
+      .get('/pastes', {
+        headers,
       })
       .then(res => {
         this.items = res.data
@@ -65,15 +65,15 @@ export default {
             content: item.content
               .split(/\r\n|\r|\n/)
               .slice(0, 10)
-              .join("\n")
+              .join('\n'),
           }))
           .sort(this.itemComparer);
       })
       .catch(err => {
         this.$message({
           showClose: true,
-          message: err?.response?.statusText || "Error sending that request",
-          type: "error"
+          message: err?.response?.statusText || 'Error sending that request',
+          type: 'error',
         });
       })
       .finally(() => {
@@ -84,12 +84,12 @@ export default {
   methods: {
     onDelete(item, index) {
       const headers = {
-        Authorization: `Bearer ${this.$store.state.auth.token}`
+        Authorization: `Bearer ${this.$store.state.auth.token}`,
       };
 
       axios
         .delete(`/pastes/${item.id}`, {
-          headers
+          headers,
         })
         .then(() => {
           this.items.splice(index, 1);
@@ -97,8 +97,8 @@ export default {
         .catch(err => {
           this.$message({
             showClose: true,
-            message: err?.response?.statusText || "Error sending that request",
-            type: "error"
+            message: err?.response?.statusText || 'Error sending that request',
+            type: 'error',
           });
         });
     },
@@ -111,8 +111,8 @@ export default {
       } else {
         return 0;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -137,7 +137,8 @@ export default {
   position: absolute;
   text-align: center;
   top: 45%;
-  width: 100%;
+  right: 50%;
+  transform: translateX(50%);
 
   h2 {
     padding-bottom: 1.5rem;

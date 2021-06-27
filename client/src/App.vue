@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: 'App',
 };
 </script>
 
@@ -33,7 +33,7 @@ body {
 
 .CodeMirror {
   height: 100% !important;
-  font-family: "Fira Mono", monospace !important;
+  font-family: 'Fira Mono', monospace !important;
   font-size: 14px !important;
   padding: 10px 0 !important;
 }

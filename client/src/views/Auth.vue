@@ -62,15 +62,15 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "Auth",
+  name: 'Auth',
 
   watch: {
     $route(to) {
-      this.isLogin = to.params.action === "login";
-    }
+      this.isLogin = to.params.action === 'login';
+    },
   },
 
   data() {
@@ -79,24 +79,24 @@ export default {
         callback();
       } else {
         axios
-          .post("/auth/check_username", {
-            username: value
+          .post('/auth/check_username', {
+            username: value,
           })
           .then(() => {
             callback();
           })
           .catch(() => {
-            callback(new Error("Username is not available"));
+            callback(new Error('Username is not available'));
           });
       }
     };
 
     return {
-      isLogin: this.$route.params.action === "login",
+      isLogin: this.$route.params.action === 'login',
 
       model: {
-        username: "",
-        password: ""
+        username: '',
+        password: '',
       },
 
       loading: false,
@@ -105,43 +105,43 @@ export default {
         username: [
           {
             required: true,
-            message: "Username is required",
-            trigger: "blur"
+            message: 'Username is required',
+            trigger: 'blur',
           },
           {
             min: 3,
-            message: "Username should be at least 3 characters",
-            trigger: "blur"
+            message: 'Username should be at least 3 characters',
+            trigger: 'blur',
           },
           {
             max: 20,
-            message: "Username should be under 20 characters",
-            trigger: "blur"
+            message: 'Username should be under 20 characters',
+            trigger: 'blur',
           },
           {
             validator: checkUsername,
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         password: [
           {
             required: true,
-            message: "Password is required",
-            trigger: "blur"
+            message: 'Password is required',
+            trigger: 'blur',
           },
           {
             min: 8,
-            message: "Password should be at least 8 characters",
-            trigger: "blur"
-          }
-        ]
-      }
+            message: 'Password should be at least 8 characters',
+            trigger: 'blur',
+          },
+        ],
+      },
     };
   },
 
   mounted() {
     if (this.$store.state.auth.isAuthorized) {
-      this.$router.replace("/");
+      this.$router.replace('/');
     }
   },
 
@@ -155,29 +155,29 @@ export default {
           const { username, password } = this.model;
 
           this.$store
-            .dispatch(this.isLogin ? "login" : "register", {
+            .dispatch(this.isLogin ? 'login' : 'register', {
               username,
-              password
+              password,
             })
             .then(() => {
               this.loading = false;
-              this.$router.replace("/");
+              this.$router.replace('/');
             })
             .catch(err => {
               this.loading = false;
 
               this.$message({
                 showClose: true,
-                message: err.message || "Error sending that request",
-                type: "error"
+                message: err.message || 'Error sending that request',
+                type: 'error',
               });
             });
         })
         .catch(() => {
           this.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

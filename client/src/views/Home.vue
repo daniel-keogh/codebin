@@ -6,28 +6,28 @@
 </template>
 
 <script>
-import Editor from "@/components/Editor";
-import EditorCard from "@/components/EditorCard";
-import EditorHeader from "@/components/EditorHeader";
+import Editor from '@/components/Editor';
+import EditorCard from '@/components/EditorCard';
+import EditorHeader from '@/components/EditorHeader';
 
-import axios from "axios";
-import hljs from "highlight.js";
-import { CodeMirror } from "vue-codemirror";
+import axios from 'axios';
+import hljs from 'highlight.js';
+import { CodeMirror } from 'vue-codemirror';
 
 export default {
-  name: "Home",
+  name: 'Home',
 
   components: {
     Editor,
     EditorCard,
-    EditorHeader
+    EditorHeader,
   },
 
   data() {
     return {
-      mimeType: "text/plain",
-      code: "",
-      mimeTypeChanged: false
+      mimeType: 'text/plain',
+      code: '',
+      mimeTypeChanged: false,
     };
   },
 
@@ -42,8 +42,8 @@ export default {
         .catch(err => {
           this.$message({
             showClose: true,
-            message: err?.response?.statusText || "Error fetching paste",
-            type: "error"
+            message: err?.response?.statusText || 'Error fetching paste',
+            type: 'error',
           });
         });
     }
@@ -51,14 +51,14 @@ export default {
 
   computed: {
     disableSave() {
-      return this.code.trim() === "";
-    }
+      return this.code.trim() === '';
+    },
   },
 
   methods: {
     onSave(expireAfterMinutes) {
       const headers = {
-        Authorization: `Bearer ${this.$store.state.auth.token}`
+        Authorization: `Bearer ${this.$store.state.auth.token}`,
       };
 
       let mimeType = this.mimeType;
@@ -73,15 +73,15 @@ export default {
 
       axios
         .post(
-          "/pastes",
+          '/pastes',
           {
             content: this.code,
             mimeType,
-            expireAfterMinutes: expireAfterMinutes?.value
+            expireAfterMinutes: expireAfterMinutes?.value,
           },
           {
-            headers
-          }
+            headers,
+          },
         )
         .then(res => {
           this.$router.replace(`/${res.data.id}`);
@@ -89,8 +89,8 @@ export default {
         .catch(err => {
           this.$message({
             showClose: true,
-            message: err?.response?.statusText || "Error sending that request",
-            type: "error"
+            message: err?.response?.statusText || 'Error sending that request',
+            type: 'error',
           });
         });
     },
@@ -100,8 +100,8 @@ export default {
         this.mimeTypeChanged = true;
       }
       this.mimeType = lang;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -51,18 +51,18 @@
 </template>
 
 <script>
-import ProfilePopover from "@/components/ProfilePopover";
+import ProfilePopover from '@/components/ProfilePopover';
 
 export default {
-  name: "EditorHeader",
+  name: 'EditorHeader',
 
   components: {
-    ProfilePopover
+    ProfilePopover,
   },
 
   props: {
     readonly: Boolean,
-    disableSave: Boolean
+    disableSave: Boolean,
   },
 
   created() {
@@ -72,25 +72,25 @@ export default {
   data() {
     return {
       controls: [
-        { label: "New", icon: "document-add" },
-        { label: "Edit", icon: "edit" },
-        { label: "Copy", icon: "copy-document" },
-        { label: "Raw", icon: "document" }
+        { label: 'New', icon: 'document-add' },
+        { label: 'Edit', icon: 'edit' },
+        { label: 'Copy', icon: 'copy-document' },
+        { label: 'Raw', icon: 'document' },
       ],
       expiration: null,
       expires: [
-        { label: "Never", value: null },
-        { label: "15 minutes", value: 15 },
-        { label: "30 minutes", value: 30 },
-        { label: "1 hour", value: 60 },
-        { label: "3 hours", value: 180 },
-        { label: "6 hours", value: 360 },
-        { label: "12 hours", value: 720 },
-        { label: "1 day", value: 1440 },
-        { label: "1 week", value: 10080 }
-      ]
+        { label: 'Never', value: null },
+        { label: '15 minutes', value: 15 },
+        { label: '30 minutes', value: 30 },
+        { label: '1 hour', value: 60 },
+        { label: '3 hours', value: 180 },
+        { label: '6 hours', value: 360 },
+        { label: '12 hours', value: 720 },
+        { label: '1 day', value: 1440 },
+        { label: '1 week', value: 10080 },
+      ],
     };
-  }
+  },
 };
 </script>
 

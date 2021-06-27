@@ -62,15 +62,15 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment';
 
-import { CodeMirror } from "vue-codemirror";
+import { CodeMirror } from 'vue-codemirror';
 
 export default {
-  name: "PasteCard",
+  name: 'PasteCard',
 
   props: {
-    item: Object
+    item: Object,
   },
 
   data() {
@@ -79,18 +79,18 @@ export default {
         readOnly: true,
         styleActiveLine: false,
         cursorBlinkRate: -1,
-        mode: "text/plain",
-        tabSize: 4
+        mode: 'text/plain',
+        tabSize: 4,
       },
-      deletePopoverVisible: false
+      deletePopoverVisible: false,
     };
   },
 
   methods: {
     onConfirmDelete() {
       this.deletePopoverVisible = false;
-      this.$emit("delete");
-    }
+      this.$emit('delete');
+    },
   },
 
   filters: {
@@ -100,15 +100,15 @@ export default {
 
     timeuntil(minutes, createdAt) {
       const expires = moment(createdAt)
-        .add(minutes, "m")
+        .add(minutes, 'm')
         .toDate();
       return moment(expires).fromNow();
     },
 
     getlang(mime) {
       return CodeMirror.findModeByMIME(mime)?.name || mime;
-    }
-  }
+    },
+  },
 };
 </script>
 

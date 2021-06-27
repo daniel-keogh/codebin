@@ -29,12 +29,6 @@ $ npm run start:prod
 $ npm run client
 ```
 
-### Running Both with Concurrently
-
-```sh
-$ npm run dev
-```
-
 ## Server Docs
 
 Swagger docs are available at `/api-docs`.

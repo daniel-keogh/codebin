@@ -38,19 +38,19 @@
 
 <script>
 export default {
-  name: "ProfilePopover",
+  name: 'ProfilePopover',
 
   computed: {
     isAuth() {
       return this.$store.state.auth.isAuthorized;
-    }
+    },
   },
 
   methods: {
     logout() {
-      this.$store.dispatch("logout");
-    }
-  }
+      this.$store.dispatch('logout');
+    },
+  },
 };
 </script>
 

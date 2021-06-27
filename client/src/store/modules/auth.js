@@ -1,11 +1,11 @@
-import axios from "axios";
-import jwt from "jwt-decode";
+import axios from 'axios';
+import jwt from 'jwt-decode';
 
 export default {
   state: () => ({
-    token: "",
-    username: "",
-    isAuthorized: false
+    token: '',
+    username: '',
+    isAuthorized: false,
   }),
 
   mutations: {
@@ -16,42 +16,42 @@ export default {
     },
 
     clearAuthData(state) {
-      state.token = "";
+      state.token = '';
       state.isAuthorized = false;
-      state.username = "";
-    }
+      state.username = '';
+    },
   },
 
   actions: {
     init({ dispatch }) {
-      dispatch("autoLogin");
+      dispatch('autoLogin');
     },
 
     async register({ commit, dispatch }, payload) {
       const { username, password } = payload;
 
       try {
-        const res = await axios.post("/auth/register", {
+        const res = await axios.post('/auth/register', {
           username,
-          password
+          password,
         });
 
         const token = res.data.accessToken;
 
-        commit("authUser", {
+        commit('authUser', {
           token,
           isAuthorized: true,
-          username
+          username,
         });
 
-        dispatch("startLogoutTimer", jwt(token).exp);
+        dispatch('startLogoutTimer', jwt(token).exp);
 
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
       } catch (err) {
         if (err.response) {
           throw new Error(err.response.data.message);
         } else {
-          throw new Error("Unable to register. Try again later");
+          throw new Error('Unable to register. Try again later');
         }
       }
     },
@@ -60,61 +60,61 @@ export default {
       const { username, password } = payload;
 
       try {
-        const res = await axios.post("/auth/login", {
+        const res = await axios.post('/auth/login', {
           username,
-          password
+          password,
         });
 
         const token = res.data.accessToken;
 
-        commit("authUser", {
+        commit('authUser', {
           token,
           isAuthorized: true,
-          username
+          username,
         });
 
-        dispatch("startLogoutTimer", jwt(token).exp);
+        dispatch('startLogoutTimer', jwt(token).exp);
 
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
       } catch (err) {
         if (err.response) {
           throw new Error(err.response.data.message);
         } else {
-          throw new Error("Unable to login. Try again later");
+          throw new Error('Unable to login. Try again later');
         }
       }
     },
 
     autoLogin({ commit, dispatch }) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
 
       if (token) {
         const { username, exp } = jwt(token);
 
         if (new Date() >= new Date(exp * 1000)) {
           // Token expired
-          localStorage.removeItem("token");
+          localStorage.removeItem('token');
           return;
         }
 
-        commit("authUser", {
+        commit('authUser', {
           token,
           isAuthorized: true,
-          username
+          username,
         });
 
-        dispatch("startLogoutTimer", exp);
+        dispatch('startLogoutTimer', exp);
       }
     },
 
     logout({ commit }) {
-      localStorage.removeItem("token");
-      commit("clearAuthData");
+      localStorage.removeItem('token');
+      commit('clearAuthData');
     },
 
     startLogoutTimer({ dispatch }, time) {
       const exp = new Date(time * 1000) - new Date();
-      setTimeout(() => dispatch("logout"), exp);
-    }
-  }
+      setTimeout(() => dispatch('logout'), exp);
+    },
+  },
 };

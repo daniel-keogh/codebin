@@ -18,25 +18,25 @@
 </template>
 
 <script>
-import Editor from "@/components/Editor";
-import EditorCard from "@/components/EditorCard";
-import EditorHeader from "@/components/EditorHeader";
+import Editor from '@/components/Editor';
+import EditorCard from '@/components/EditorCard';
+import EditorHeader from '@/components/EditorHeader';
 
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "Paste",
+  name: 'Paste',
 
   components: {
     Editor,
     EditorCard,
-    EditorHeader
+    EditorHeader,
   },
 
   data() {
     return {
-      code: "",
-      mimeType: "text/plain"
+      code: '',
+      mimeType: 'text/plain',
     };
   },
 
@@ -50,11 +50,11 @@ export default {
       .catch(err => {
         this.$message({
           showClose: true,
-          message: err?.response?.statusText || "Error sending that request",
-          type: "error"
+          message: err?.response?.statusText || 'Error sending that request',
+          type: 'error',
         });
 
-        this.$router.push("/");
+        this.$router.push('/');
       });
   },
 
@@ -64,17 +64,17 @@ export default {
 
       this.$message({
         showClose: true,
-        message: "Copied to clipboard!",
-        type: "success"
+        message: 'Copied to clipboard!',
+        type: 'success',
       });
     },
 
     onEdit() {
       this.$router.push({
-        name: "Home",
+        name: 'Home',
         query: {
-          id: this.$route.params.id
-        }
+          id: this.$route.params.id,
+        },
       });
     },
 
@@ -84,8 +84,8 @@ export default {
 
     onLangChange(lang) {
       this.mimeType = lang;
-    }
-  }
+    },
+  },
 };
 </script>
 
