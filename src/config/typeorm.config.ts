@@ -4,6 +4,10 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class TypeOrmConfig implements TypeOrmOptionsFactory {
   private options: TypeOrmModuleOptions = {
+    ssl: this.isProduction,
+    extra: {
+      ssl: this.isProduction ? { rejectUnauthorized: false } : null,
+    },
     type: 'postgres',
     host: process.env.DB_HOST,
     port: +process.env.DB_PORT,
@@ -13,6 +17,10 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
     entities: [__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: true,
   };
+
+  private get isProduction() {
+    return process.env.NODE_ENV === 'production';
+  }
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return this.options;
