@@ -39,13 +39,12 @@ export class PastesService {
   }
 
   async deletePaste(id: string, user: User): Promise<void> {
-    const result = await this.pasteRepository.delete({
-      id,
-      userId: user.id,
-    });
+    const result = await this.pasteRepository.delete({ id, user });
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Paste with ID "${id}" not found`);
+      throw new NotFoundException(
+        `Paste with ID "${id}" either not found, or does not belong to the user`,
+      );
     }
   }
 

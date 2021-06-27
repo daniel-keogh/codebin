@@ -12,19 +12,35 @@ import {
   Button,
   ButtonGroup,
   Card,
+  Container,
+  Divider,
+  Form,
+  FormItem,
   Icon,
+  Input,
   Main,
   Message,
   Option,
-  Select
+  PageHeader,
+  Popover,
+  Select,
+  Tag
 } from "element-ui";
 
 Vue.use(Button);
 Vue.use(ButtonGroup);
 Vue.use(Card);
+Vue.use(Container);
+Vue.use(Divider);
+Vue.use(Form);
+Vue.use(FormItem);
 Vue.use(Icon);
+Vue.use(Input);
 Vue.use(Main);
 Vue.use(Option);
+Vue.use(PageHeader);
+Vue.use(Popover);
 Vue.use(Select);
+Vue.use(Tag);
 
 Vue.prototype.$message = Message;

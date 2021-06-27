@@ -16,7 +16,7 @@ export class PasteRepository extends Repository<Paste> {
     const paste = new Paste();
     paste.content = content;
     paste.user = user;
-    
+
     if (mimeType) {
       paste.mimeType = mimeType;
     }
@@ -30,9 +30,6 @@ export class PasteRepository extends Repository<Paste> {
     } catch (_) {
       throw new InternalServerErrorException();
     }
-
-    // Don't send back user info
-    delete paste.user;
 
     return paste;
   }

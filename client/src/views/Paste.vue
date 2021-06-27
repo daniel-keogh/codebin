@@ -1,23 +1,25 @@
 <template>
-  <div class="paste">
-    <el-main>
-      <el-card class="card" :body-style="{ padding: '0px', height: '100%' }">
-        <editor-header
-          slot="header"
-          @raw="onRaw"
-          @copy="onCopy"
-          @edit="onEdit"
-          @new="$router.push('/')"
-          readonly
-        />
-        <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" readonly />
-      </el-card>
-    </el-main>
-  </div>
+  <editor-card>
+    <editor-header
+      slot="header"
+      @raw="onRaw"
+      @copy="onCopy"
+      @edit="onEdit"
+      @new="$router.push('/')"
+      readonly
+    />
+    <editor
+      :mimeType="mimeType"
+      @lang-change="onLangChange"
+      v-model="code"
+      readonly
+    />
+  </editor-card>
 </template>
 
 <script>
 import Editor from "@/components/Editor";
+import EditorCard from "@/components/EditorCard";
 import EditorHeader from "@/components/EditorHeader";
 
 import axios from "axios";
@@ -27,6 +29,7 @@ export default {
 
   components: {
     Editor,
+    EditorCard,
     EditorHeader
   },
 
@@ -86,10 +89,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.paste {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped lang="scss"></style>

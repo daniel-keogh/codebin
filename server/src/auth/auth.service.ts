@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { Authorized } from './interfaces/authorized.interface';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CheckUsernameDto } from './dto/check-username.dto';
+import { AuthorizedReponseDto } from './dto/authorized-response.dto';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -19,10 +19,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(authCredentialsDto: AuthCredentialsDto): Promise<Authorized> {
-    await this.userRepository.register(authCredentialsDto);
+  async register(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<AuthorizedReponseDto> {
+    const user = await this.userRepository.register(authCredentialsDto);
 
-    const payload: JwtPayload = { username: authCredentialsDto.username };
+    const { id: userId, username } = user;
+
+    const payload: JwtPayload = { username, userId };
     const accessToken = this.jwtService.sign(payload);
 
     return {
@@ -30,16 +34,17 @@ export class AuthService {
     };
   }
 
-  async login(authCredentialsDto: AuthCredentialsDto): Promise<Authorized> {
-    const username = await this.userRepository.validatePassword(
-      authCredentialsDto,
-    );
+  async login(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<AuthorizedReponseDto> {
+    const user = await this.userRepository.validatePassword(authCredentialsDto);
 
-    if (!username) {
+    if (!user) {
       throw new UnauthorizedException('Invalid login credentials');
     }
 
-    const payload: JwtPayload = { username };
+    const { id: userId, username } = user;
+    const payload: JwtPayload = { username, userId };
     const accessToken = this.jwtService.sign(payload);
 
     return {

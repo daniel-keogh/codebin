@@ -20,3 +20,7 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## Docs
+
+Swagger docs are available at `/api-docs`.

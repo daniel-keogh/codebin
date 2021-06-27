@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  name: "app",
-  components: {}
+  name: "App"
 };
 </script>
 
@@ -34,7 +33,7 @@ body {
 
 .CodeMirror {
   height: 100% !important;
-  font-family: "Roboto Mono", monospace !important;
+  font-family: "Fira Mono", monospace !important;
   font-size: 14px !important;
   padding: 10px 0 !important;
 }
@@ -54,7 +53,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  button span {
+  .shrink-btn span {
     display: none;
   }
 

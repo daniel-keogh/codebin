@@ -1,16 +1,13 @@
 <template>
-  <div class="home">
-    <el-main>
-      <el-card class="card" :body-style="{ padding: '0px', height: '100%' }">
-        <editor-header slot="header" :disableSave="disableSave" @save="onSave" />
-        <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" />
-      </el-card>
-    </el-main>
-  </div>
+  <editor-card>
+    <editor-header slot="header" :disableSave="disableSave" @save="onSave" />
+    <editor :mimeType="mimeType" @lang-change="onLangChange" v-model="code" />
+  </editor-card>
 </template>
 
 <script>
 import Editor from "@/components/Editor";
+import EditorCard from "@/components/EditorCard";
 import EditorHeader from "@/components/EditorHeader";
 
 import axios from "axios";
@@ -22,6 +19,7 @@ export default {
 
   components: {
     Editor,
+    EditorCard,
     EditorHeader
   },
 
@@ -53,12 +51,16 @@ export default {
 
   computed: {
     disableSave() {
-      return this.code === "";
+      return this.code.trim() === "";
     }
   },
 
   methods: {
     onSave(expireAfterMinutes) {
+      const headers = {
+        Authorization: `Bearer ${this.$store.state.auth.token}`
+      };
+
       let mimeType = this.mimeType;
 
       if (!this.mimeTypeChanged) {
@@ -70,11 +72,17 @@ export default {
       }
 
       axios
-        .post("/pastes", {
-          content: this.code,
-          mimeType,
-          expireAfterMinutes: expireAfterMinutes?.value
-        })
+        .post(
+          "/pastes",
+          {
+            content: this.code,
+            mimeType,
+            expireAfterMinutes: expireAfterMinutes?.value
+          },
+          {
+            headers
+          }
+        )
         .then(res => {
           this.$router.replace(`/${res.data.id}`);
         })
@@ -97,10 +105,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .home {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.card {
+  height: calc(100vh - 40px);
+
+  @media (max-width: 768px) {
+    height: 100vh;
+  }
 }
 </style>

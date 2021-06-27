@@ -10,7 +10,9 @@
 
     <div class="editor-footer">
       <div class="editor-footer__start">
-        <span v-if="!readonly">Line {{ status.line }}, Column {{ status.col }}</span>
+        <span v-if="!readonly">
+          Line {{ status.line }}, Column {{ status.col }}
+        </span>
         <div v-else>
           <span>Read Only</span>
           <i class="el-icon-lock"></i>
@@ -24,7 +26,12 @@
           filterable
           placeholder="Language"
         >
-          <el-option v-for="lang in langs" :key="lang.mime" :label="lang.name" :value="lang.mime" />
+          <el-option
+            v-for="lang in langs"
+            :key="lang.mime"
+            :label="lang.name"
+            :value="lang.mime"
+          />
         </el-select>
       </div>
     </div>
@@ -67,14 +74,14 @@ export default {
     }
   },
 
-  mounted() {
-    this.setMode();
-  },
-
   watch: {
     mimeType() {
       this.setMode();
     }
+  },
+
+  mounted() {
+    this.setMode();
   },
 
   methods: {
