@@ -1,8 +1,26 @@
 # Codebin
 
-A pastebin-like service built with NestJS, PostgreSQL & Vue.
+NestJS server.
 
-## Getting Started
+## Installation
 
-- [Server](./server/README.md)
-- [Client](./client/README.md)
+```bash
+$ npm install
+```
+
+## Run
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Docs
+
+Swagger docs are available at `/api-docs`.
