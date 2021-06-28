@@ -15,17 +15,14 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors({
-    origin: new RegExp('^.+' + process.env.CLIENT_ORIGIN + '$'),
-  });
-
+  app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new TransformInterceptor());
 
   app.use(helmet());
   app.use(
     rateLimit({
       windowMs: 30 * 1000,
-      max: 10,
+      max: 25,
       handler: () => {
         throw new TooManyRequestsException();
       },
@@ -40,7 +37,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerOptions);
-  SwaggerModule.setup('api-docs', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(port);
 

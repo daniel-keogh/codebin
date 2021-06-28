@@ -31,4 +31,4 @@ $ npm run client
 
 ## Server Docs
 
-Swagger docs are available at `/api-docs`.
+Swagger docs are available at `/api/docs`.
