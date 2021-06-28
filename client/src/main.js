@@ -10,9 +10,9 @@ import './plugins/element.js';
 
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.NODE_ENV === "production" 
-  ? process.env.VUE_APP_API_URL
-  : 'http://localhost:3000/api';
+axios.defaults.baseURL = process.env.NODE_ENV === 'production'
+    ? 'https://codebin-nest.herokuapp.com/api'
+    : 'http://localhost:3000/api';
 
 Vue.config.productionTip = false;
 
