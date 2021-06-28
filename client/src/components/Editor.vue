@@ -89,7 +89,9 @@ export default {
       const lang = CodeMirror.findModeByMIME(this.mimeType);
 
       if (lang.mime !== 'text/plain') {
-        await import(`codemirror/mode/${lang.mode}/${lang.mode}.js`).then();
+        await import(
+          /* webpackChunkName: "codemirror.mode" */ `codemirror/mode/${lang.mode}/${lang.mode}.js`
+        ).then();
       }
 
       this.options.mode = lang.mime;

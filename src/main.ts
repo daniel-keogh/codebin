@@ -3,12 +3,10 @@ import { Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
-import { TooManyRequestsException } from './common/exceptions/too-many-requests.exception';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
 import * as dotenv from 'dotenv';
 import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
 
 async function bootstrap() {
   const port = process.env.PORT || 3000;
@@ -19,15 +17,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
 
   app.use(helmet());
-  app.use(
-    rateLimit({
-      windowMs: +process.env.RATE_LIMIT_SECS * 1000,
-      max: +process.env.RATE_LIMIT_MAX,
-      handler: () => {
-        throw new TooManyRequestsException();
-      },
-    }),
-  );
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('Codebin API Documetation')
