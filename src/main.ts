@@ -21,8 +21,8 @@ async function bootstrap() {
   app.use(helmet());
   app.use(
     rateLimit({
-      windowMs: 30 * 1000,
-      max: 25,
+      windowMs: +process.env.RATE_LIMIT_SECS * 1000,
+      max: +process.env.RATE_LIMIT_MAX,
       handler: () => {
         throw new TooManyRequestsException();
       },
